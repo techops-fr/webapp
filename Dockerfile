@@ -5,6 +5,7 @@ RUN apt-get install -y nginx
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git 
 # informatif
 EXPOSE 80 
+# on nettoie
 RUN rm -rf /var/www/html/*
 RUN git clone https://github.com/diranetafen/static-website-example.git /var/www/html
 CMD [ "/usr/sbin/nginx", "-g", "daemon off;" ]
