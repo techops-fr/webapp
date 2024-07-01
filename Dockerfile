@@ -1,7 +1,9 @@
 FROM ubuntu:22.04
-MAINTAINER admin@techops.ovh
+LABEL maintainer=admin@techops.ovh
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y nginx
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git 
 EXPOSE 80
-COPY static-website-example/ /var/www/html
-ENTRYPOINT [ "/usr/sbin/nginx", "-g", "daemon off;" ]
+RUN rm -rf /var/www/html/*
+RUN git clone https://github.com/diranetafen/static-website-example.git /var/www/html
+CMD [ "/usr/sbin/nginx", "-g", "daemon off;" ]
